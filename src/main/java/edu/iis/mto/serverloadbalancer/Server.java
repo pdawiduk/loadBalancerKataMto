@@ -11,6 +11,6 @@ import static org.hamcrest.Matchers.equalTo;
 public class Server {
     public double currentLoadPercentage;
 
-    public Server(int capacity) {
+    public Server() {
     }
 }
