@@ -25,6 +25,11 @@ public class CurrentLoadPercentageMatcher extends TypeSafeMatcher<Server> {
                 Math.abs(d1 - d2) < 0.01d;
     }
 
+
+    public void describeMismatchSafely(Server item, Description description) {
+        description.appendText("a server with load percentage of ").appendValue(item.currentLoadPercentage);
+    }
+
     public void describeTo(Description description) {
         description.appendText("a server with load percentage of ").appendValue(expectedLoadPercentage);
     }

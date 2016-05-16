@@ -13,4 +13,8 @@ public class Server {
 
     public Server() {
     }
+
+    public boolean contains(Vm vm) {
+        return true;
+    }
 }
