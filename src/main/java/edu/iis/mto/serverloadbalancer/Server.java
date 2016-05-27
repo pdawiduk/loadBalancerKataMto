@@ -15,14 +15,14 @@ public class Server {
     public static final double MAXIMUM_LOAD = 100.0d;
     public double currentLoadPercentage;
     public int capacity;
-    private List <Vm> vms = new ArrayList<Vm>();
+    private List<Vm> vms = new ArrayList<Vm>();
 
     public Server(int capacity) {
         this.capacity = capacity;
     }
 
     public boolean contains(Vm vm) {
-       return vms.contains(vm);
+        return vms.contains(vm);
     }
 
     public void addVm(Vm vm) {
@@ -32,5 +32,10 @@ public class Server {
 
     public int countVms() {
         return vms.size();
+    }
+
+    public boolean canFit(Vm vm)
+    {
+        return currentLoadPercentage + ((double) vm.size / (double) this.capacity * MAXIMUM_LOAD) <= MAXIMUM_LOAD ;
     }
 }
