@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
  * Created by Shogun on 2016-05-16.
  */
 public class Server {
-    private static final double MAXIMUM_LOAD = 100.0d;
+    public static final double MAXIMUM_LOAD = 100.0d;
     public double currentLoadPercentage;
     public int capacity;
     private List <Vm> vms = new ArrayList<Vm>();
