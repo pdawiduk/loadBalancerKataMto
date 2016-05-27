@@ -1,24 +1,21 @@
 package edu.iis.mto.serverloadbalancer;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 /**
  * Created by Shogun on 2016-05-16.
  */
 public class Server {
     public static final double MAXIMUM_LOAD = 100.0d;
-    public double currentLoadPercentage;
-    public int capacity;
+    private double currentLoadPercentage;
+    private int capacity;
     private List<Vm> vms = new ArrayList<Vm>();
 
     public Server(int capacity) {
-        this.capacity = capacity;
+        this.capacity=capacity;
     }
 
     public boolean contains(Vm vm) {
@@ -31,7 +28,7 @@ public class Server {
     }
 
     private double loadOfVm(Vm vm) {
-        return (double) vm.size / (double) capacity * MAXIMUM_LOAD;
+        return (double) vm.getSize() / (double) getCapacity() * MAXIMUM_LOAD;
     }
 
     public int countVms() {
@@ -40,6 +37,17 @@ public class Server {
 
     public boolean canFit(Vm vm)
     {
-        return currentLoadPercentage + (loadOfVm(vm)) <= MAXIMUM_LOAD ;
+        return getCurrentLoadPercentage() + (loadOfVm(vm)) <= MAXIMUM_LOAD ;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+
+    public double getCurrentLoadPercentage() {
+        return currentLoadPercentage;
+    }
+
+
 }
