@@ -11,7 +11,7 @@ public class VmBuilider implements Builider<Vm>{
     }
 
     public Vm build() {
-        return new Vm();
+        return new Vm(size);
     }
     public static VmBuilider vm() {
         return new VmBuilider();

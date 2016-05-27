@@ -13,7 +13,7 @@ public class ServerBuilider implements Builider<Server>{
     }
 
     public Server build(){
-        return new Server();
+        return new Server(capacity);
     }
     public static ServerBuilider server() {
         return new ServerBuilider();
