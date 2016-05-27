@@ -9,6 +9,7 @@ import org.junit.internal.matchers.TypeSafeMatcher;
  */
 public class CurrentLoadPercentageMatcher extends TypeSafeMatcher<Server> {
     private double expectedLoadPercentage;
+    private static final double EPSILON=0.01d;
 
     public CurrentLoadPercentageMatcher(double expectedLoadPercentage) {
         this.expectedLoadPercentage = expectedLoadPercentage;
@@ -22,8 +23,9 @@ public class CurrentLoadPercentageMatcher extends TypeSafeMatcher<Server> {
     protected boolean doublesAreEqual(double d1, double d2) {
 
         return d1 == d2 ||
-                Math.abs(d1 - d2) < 0.01d;
+                Math.abs(d1 - d2) <  EPSILON;
     }
+
 
 
     public void describeMismatchSafely(Server item, Description description) {
