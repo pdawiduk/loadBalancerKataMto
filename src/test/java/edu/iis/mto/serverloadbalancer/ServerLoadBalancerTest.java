@@ -7,6 +7,7 @@ import static edu.iis.mto.serverloadbalancer.ServerBuilider.*;
 import static edu.iis.mto.serverloadbalancer.CurrentLoadPercentageMatcher.*;
 import static edu.iis.mto.serverloadbalancer.VmBuilider.*;
 
+import org.hamcrest.Matcher;
 import org.junit.Test;
 
 public class ServerLoadBalancerTest {
@@ -31,8 +32,9 @@ public class ServerLoadBalancerTest {
         assertThat(server, hasCurrentLoadOf(100.0d));
         assertThat("server should contain the vm", server.contains(vm));
     }
+
     @Test
-    public void balancingOneServerWithTenSlotsCapacity_andOneSlotVm_fillsTheServerWithTenPercent(){
+    public void balancingOneServerWithTenSlotsCapacity_andOneSlotVm_fillsTheServerWithTenPercent() {
         Server server = a(server().withCapacity(10));
         Vm vm = a(vm().ofSize(1));
         balancing(aServersListwith(server), aVmsListWith(vm));
@@ -41,8 +43,18 @@ public class ServerLoadBalancerTest {
     }
 
     @Test
-    public void balancingTheServerWithEnoughRoom_fillsTheServerWithAllVms(){
+    public void balancingTheServerWithEnoughRoom_fillsTheServerWithAllVms() {
+        Server server = a(server().withCapacity(100));
+        Vm firstVm = a(vm().ofSize(1));
+        Vm secondVm = a(vm().ofSize(1));
+        balancing(aServersListwith(server), aVmsListWith(firstVm, secondVm));
+        assertThat(server, hasAvmsCountOf(2));
+        assertThat("server should contain the first vm", server.contains(firstVm));
+        assertThat("server should contain the second vm", server.contains(secondVm));
+    }
 
+    private Matcher<? super Server> hasAvmsCountOf(int expectedVMsCount) {
+        return new ServerVMsCountMatcher(expectedVMsCount);
     }
 
     private Vm[] aVmsListWith(Vm... vms) {
@@ -62,10 +74,9 @@ public class ServerLoadBalancerTest {
         return servers;
     }
 
-    private <T> T a(Builider<T> builider){
+    private <T> T a(Builider<T> builider) {
         return builider.build();
     }
-
 
 
 }
