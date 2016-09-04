@@ -6,6 +6,7 @@ import javafx.util.Builder;
  * Created by Pawełek on 04.09.2016.
  */
 public class Server {
+    public static final double MAXIMUM_FILLING = 100.0d;
     public double currentLoadPercentage;
     public int capacity;
 
@@ -18,4 +19,7 @@ public class Server {
     }
 
 
+    public void addVm(Vm vm) {
+        currentLoadPercentage = (double) vm.size / (double) capacity * MAXIMUM_FILLING;
+    }
 }
