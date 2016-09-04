@@ -9,9 +9,21 @@ import java.util.List;
 public class Server {
 
     public static final double FULL_PERCENTAGE = 100.0d;
-    public double currentLoadPercentage;
-    public int capacity;
+    private double currentLoadPercentage;
+    private int capacity;
     private List<Vm> vms = new ArrayList<Vm>();
+
+    public double getCurrentLoadPercentage() {
+        return currentLoadPercentage;
+    }
+
+    public void setCurrentLoadPercentage(double currentLoadPercentage) {
+        this.currentLoadPercentage = currentLoadPercentage;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
 
     public Server(int capacity) {
         this.capacity= capacity;
@@ -34,7 +46,7 @@ public class Server {
     }
 
     private double valueOfFilling(Vm vm) {
-        return (double) vm.size/(double) capacity * FULL_PERCENTAGE;
+        return (double) vm.getSize()/(double) capacity * FULL_PERCENTAGE;
     }
 
     public int countVms() {
