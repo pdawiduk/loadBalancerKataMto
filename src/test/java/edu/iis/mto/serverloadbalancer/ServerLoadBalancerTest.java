@@ -7,7 +7,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.junit.Test;
+
+import java.util.Collection;
 
 public class ServerLoadBalancerTest {
 	@Test
@@ -22,6 +25,28 @@ public class ServerLoadBalancerTest {
 		assertThat(server, hastCurrentLoadOf(0.0d));
 	}
 
+	@Test
+	public void balancingOneServerWithOneSlotCapacity_andOneSlotVm_fillsTheServerWithTheVm(){
+		Server server = a(server().withCapacity(10));
+		Vm vm = a(vm().ofSize(1));
+
+		balancing(serverListWithServers(server),vmsListWith(vm));
+		assertThat(server, hastCurrentLoadOf(100.0d));
+		assertThat("server should contain the vm", server.contains(vm));
+
+	}
+
+	private Vm[] vmsListWith(Vm... vms) {
+		return vms;
+	}
+
+	private Vm a(VmBuilder vmBuilder) {
+		return vmBuilder.build();
+	}
+
+	private VmBuilder vm() {
+		return new VmBuilder();
+	}
 
 
 	private void balancing(Server[] servers, Vm[] vms) {
