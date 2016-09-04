@@ -15,12 +15,17 @@ public class ServerBulider implements Builder<Server> {
 
     public Server build() {
         Server server = new Server(capacity);
-        if(initialLoad>0){
-        int initalVmSize =(int)((double) initialLoad/(double) capacity * 100d);
-        Vm initialVm = VmBuilder.vm().ofSize(initalVmSize).build();
-        server.addVm(initialVm);}
+        addInitialLoad(server);
         return server;
     }
+
+    private void addInitialLoad(Server server) {
+        if(initialLoad>0){
+        int initalVmSize =(int)((double) initialLoad/(double) capacity * Server.FULL_PERCENTAGE);
+        Vm initialVm = VmBuilder.vm().ofSize(initalVmSize).build();
+        server.addVm(initialVm);}
+    }
+
     public static ServerBulider server() {
         return new ServerBulider();
     }
