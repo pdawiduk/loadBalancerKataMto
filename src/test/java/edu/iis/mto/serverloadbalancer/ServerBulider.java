@@ -14,4 +14,7 @@ public class ServerBulider {
     public Server build() {
         return new Server();
     }
+    public static ServerBulider server() {
+        return new ServerBulider();
+    }
 }
