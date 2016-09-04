@@ -3,16 +3,13 @@ package edu.iis.mto.serverloadbalancer;
 
 import static edu.iis.mto.serverloadbalancer.CurrentLoadPercentageMatcher.hastCurrentLoadOf;
 import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
+import static edu.iis.mto.serverloadbalancer.VmBuilder.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
-import java.util.Collection;
-
-public class ServerLoadBalancerTest {
+public class ServerLoadBalancerTest  {
 	@Test
 	public void itCompiles() {
 		assertThat(true, equalTo(true));
@@ -40,13 +37,9 @@ public class ServerLoadBalancerTest {
 		return vms;
 	}
 
-	private Vm a(VmBuilder vmBuilder) {
-		return vmBuilder.build();
-	}
 
-	private VmBuilder vm() {
-		return new VmBuilder();
-	}
+
+
 
 
 	private void balancing(Server[] servers, Vm[] vms) {
@@ -61,10 +54,10 @@ public class ServerLoadBalancerTest {
 		return servers;
 	}
 
-	private Server a(ServerBuilder serverBuilder) {
-		return serverBuilder.build();
-	}
 
+	private <T> T a(Builder<T> builder){
+		return builder.build();
+	}
 
 
 
