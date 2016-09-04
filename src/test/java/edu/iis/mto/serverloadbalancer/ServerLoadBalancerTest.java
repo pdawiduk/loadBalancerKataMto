@@ -19,6 +19,29 @@ public class ServerLoadBalancerTest {
 		 balancing(aServersListWith(server),anEmptyListOfVms());
 		 assertThat(server, hasCurrentLoadOf(0.0d));
 	 }
+	 
+	 @Test
+	 	public void balancingServerWithNOneVms(){
+	 		Server server = a(ServerBulider.server().withCapacity(1));
+		 	Vm vm = a(vm().ofSize(1));
+		 	balancing(aServersListWith(server),aVmsListWith(vm));
+		 	assertThat(server,hasCurrentLoadOf(100.0d));
+		 assertThat("server should contain the vm", server.contains(vm));
+					
+	 }
+
+	private Vm[] aVmsListWith(Vm... vms) {
+		return vms;
+	}
+
+	private Vm a(VmBuilder vmBuilder) {
+		return vmBuilder.build();
+	}
+
+	private VmBuilder vm() {
+		return new VmBuilder();
+	}
+
 
 
 	private void balancing(Server[] servers, Vm[] vms) {
