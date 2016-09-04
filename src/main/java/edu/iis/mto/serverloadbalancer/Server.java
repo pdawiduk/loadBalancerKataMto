@@ -29,7 +29,7 @@ public class Server {
     }
 
     public void addVm(Vm vm) {
-        currentLoadPercentage= valueOfFilling(vm);
+        currentLoadPercentage+= valueOfFilling(vm);
         this.vms.add(vm);
     }
 

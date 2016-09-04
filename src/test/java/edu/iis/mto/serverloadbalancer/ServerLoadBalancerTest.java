@@ -74,6 +74,25 @@ public class ServerLoadBalancerTest {
 		assertThat("server should not contain the vm", !server.contains(vm));
 	}
 
+	@Test
+	public void balancingServersAndVms(){
+		Server server1 = a(ServerBulider.server().withCapacity(4));
+		Server server2 = a(ServerBulider.server().withCapacity(6));
+		Vm vm1 = a(vm().ofSize(1));
+		Vm vm2 = a(vm().ofSize(4));
+		Vm vm3= a(vm().ofSize(2));
+
+		balancing(aServersListWith(server1,server2),aVmsListWith(vm1,vm2,vm3));
+
+		assertThat("less server 1 should contain vm1", server1.contains(vm1));
+		assertThat("less server 2 should contain vm2", server2.contains(vm2));
+		assertThat("less server 1 should contain vm3", server1.contains(vm3));
+
+		assertThat(server1, hasCurrentLoadOf(75.0d));
+		assertThat(server2, hasCurrentLoadOf(66.66d));
+
+
+	}
 
 
 	private Vm[] aVmsListWith(Vm... vms) {
