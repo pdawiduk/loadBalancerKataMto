@@ -31,6 +31,15 @@ public class ServerLoadBalancerTest {
 					
 	 }
 
+	 @Test
+	 public void balancingServerWithOneVmsNotFillAllResources(){
+		 Server server = a(ServerBulider.server().withCapacity(10));
+		 Vm vm = a(vm().ofSize(1));
+		 balancing(aServersListWith(server),aVmsListWith(vm));
+		 assertThat(server,hasCurrentLoadOf(10.0d));
+		 assertThat("server should contain the vm", server.contains(vm));
+	 }
+
 	private Vm[] aVmsListWith(Vm... vms) {
 		return vms;
 	}
