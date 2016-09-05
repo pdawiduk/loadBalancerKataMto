@@ -8,7 +8,14 @@ public class ServerLoadBalancer {
 
 
         for (Vm vm: vms) {
-        servers[0].addVm(vm);
+            Server lessLoadedServer=null;
+            for (Server server: servers) {
+                if(lessLoadedServer == null
+                        || server.currentLoadPercentage < lessLoadedServer.currentLoadPercentage){
+                    lessLoadedServer = server;
+                }
+            }
+        lessLoadedServer.addVm(vm);
 
 
         }
