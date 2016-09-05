@@ -3,7 +3,7 @@ package edu.iis.mto.serverloadbalancer;
 /**
  * Created by Pawełek on 05.09.2016.
  */
-public class ServerBuilder {
+public class ServerBuilder implements Builder<Server>{
     private int capacity;
 
     public ServerBuilder withCapacity(int capacity) {
