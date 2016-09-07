@@ -10,10 +10,10 @@ public class Server {
     public double currentLoadPercentage;
     public int capacity;
     private static final double  MAXIMIM_LOAD = 100.0d;;
-    List<Vm> servers = new ArrayList<Vm>();
+    List<Vm> vms = new ArrayList<Vm>();
 
     public boolean contains(Vm vm) {
-        return true;
+        return vms.contains(vm);
     }
 
     public Server(int capacity) {
@@ -23,10 +23,10 @@ public class Server {
     public void addVm(Vm vm) {
 
         currentLoadPercentage = (double) vm.size/(double) capacity * MAXIMIM_LOAD;
-        servers.add(vm);
+        vms.add(vm);
     }
 
     public int countVms() {
-        return servers.size();
+        return vms.size();
     }
 }
