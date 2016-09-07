@@ -9,7 +9,7 @@ import java.util.List;
 public class Server {
     public double currentLoadPercentage;
     public int capacity;
-    private static final double  MAXIMIM_LOAD = 100.0d;;
+    public static final double  MAXIMIM_LOAD = 100.0d;;
     List<Vm> vms = new ArrayList<Vm>();
 
     public boolean contains(Vm vm) {
