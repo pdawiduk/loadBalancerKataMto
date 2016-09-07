@@ -3,7 +3,7 @@ package edu.iis.mto.serverloadbalancer;
 /**
  * Created by Pawełek on 07.09.2016.
  */
-public class VmBuilder {
+public class VmBuilder implements Builder<Vm> {
 
     private int size;
 
@@ -15,4 +15,10 @@ public class VmBuilder {
     public Vm build() {
         return new Vm();
     }
+
+    public static VmBuilder vm() {
+        return new VmBuilder();
+    }
+
+
 }
